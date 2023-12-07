@@ -2,26 +2,260 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+.stack {
+  align-items: start;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+.stack > * {
+  opacity: 1;
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+.stack > *:nth-child(1) {
+  opacity: 1;
+  z-index: 100;
+}
+
+.stack > *:nth-child(2) {
+  opacity: 1;
+  z-index: 99;
+}
+
+.stack > *:nth-child(3) {
+  opacity: 1;
+  z-index: 98;
+}
+
+.stack > *:nth-child(4) {
+  opacity: 1;
+  z-index: 97;
+}
+
+.stack > *:nth-child(5) {
+  opacity: 1;
+  z-index: 96;
+}
+
+.stack > *:nth-child(6) {
+  opacity: 1;
+  z-index: 95;
+}
+
+.stack > *:nth-child(7) {
+  opacity: 1;
+  z-index: 94;
+}
+
+.stack > *:nth-child(8) {
+  opacity: 1;
+  z-index: 93;
+}
+
+.stack > *:nth-child(9) {
+  opacity: 1;
+  z-index: 92;
+}
+
+.stack > *:nth-child(10) {
+  opacity: 1;
+  z-index: 91;
+}
+
+.stack > *:nth-child(11) {
+  opacity: 1;
+  z-index: 90;
+}
+
+.stack > *:nth-child(12) {
+  opacity: 1;
+  z-index: 89;
+}
+
+.stack > *:nth-child(13) {
+  opacity: 1;
+  z-index: 88;
+}
+
+.stack > *:nth-child(14) {
+  opacity: 1;
+  z-index: 87;
+}
+
+.stack > *:nth-child(15) {
+  opacity: 1;
+  z-index: 86;
+}
+
+.stack > *:nth-child(16) {
+  opacity: 1;
+  z-index: 85;
+}
+
+.stack > *:nth-child(17) {
+  opacity: 1;
+  z-index: 84;
+}
+
+.stack > *:nth-child(18) {
+  opacity: 1;
+  z-index: 83;
+}
+
+.stack > *:nth-child(19) {
+  opacity: 1;
+  z-index: 82;
+}
+
+.stack > *:nth-child(20) {
+  opacity: 1;
+  z-index: 81;
+}
+
+.stack > *:nth-child(21) {
+  opacity: 1;
+  z-index: 80;
+}
+
+.stack > *:nth-child(22) {
+  opacity: 1;
+  z-index: 79;
+}
+
+.stack > *:nth-child(23) {
+  opacity: 1;
+  z-index: 78;
+}
+
+.stack > *:nth-child(24) {
+  opacity: 1;
+  z-index: 77;
+}
+
+.stack > *:nth-child(25) {
+  opacity: 1;
+  z-index: 76;
+}
+
+.stack > *:nth-child(26) {
+  opacity: 1;
+  z-index: 75;
+}
+
+.stack > *:nth-child(27) {
+  opacity: 1;
+  z-index: 74;
+}
+
+.stack > *:nth-child(28) {
+  opacity: 1;
+  z-index: 73;
+}
+
+.stack > *:nth-child(29) {
+  opacity: 1;
+  z-index: 72;
+}
+
+.stack > *:nth-child(30) {
+  opacity: 1;
+  z-index: 71;
+}
+
+.stack > *:nth-child(31) {
+  opacity: 1;
+  z-index: 70;
+}
+
+.stack > *:nth-child(32) {
+  opacity: 1;
+  z-index: 69;
+}
+
+.stack > *:nth-child(33) {
+  opacity: 1;
+  z-index: 68;
+}
+
+.stack > *:nth-child(34) {
+  opacity: 1;
+  z-index: 67;
+}
+
+.stack > *:nth-child(35) {
+  opacity: 1;
+  z-index: 66;
+}
+
+.stack > *:nth-child(36) {
+  opacity: 1;
+  z-index: 65;
+}
+
+.stack > *:nth-child(37) {
+  opacity: 1;
+  z-index: 64;
+}
+
+.stack > *:nth-child(38) {
+  opacity: 1;
+  z-index: 63;
+}
+
+.stack > *:nth-child(39) {
+  opacity: 1;
+  z-index: 62;
+}
+
+.stack > *:nth-child(40) {
+  opacity: 1;
+  z-index: 61;
+}
+
+.stack > *:nth-child(41) {
+  opacity: 1;
+  z-index: 60;
+}
+
+.stack > *:nth-child(42) {
+  opacity: 1;
+  z-index: 59;
+}
+
+.stack > *:nth-child(43) {
+  opacity: 1;
+  z-index: 58;
+}
+
+.stack > *:nth-child(44) {
+  opacity: 1;
+  z-index: 57;
+}
+
+.stack > *:nth-child(45) {
+  opacity: 1;
+  z-index: 56;
+}
+
+.stack > *:nth-child(46) {
+  opacity: 1;
+  z-index: 55;
+}
+
+.stack > *:nth-child(47) {
+  opacity: 1;
+  z-index: 54;
+}
+
+.stack > *:nth-child(48) {
+  opacity: 1;
+  z-index: 53;
+}
+
+.stack > *:nth-child(49) {
+  opacity: 1;
+  z-index: 52;
+}
+
+.stack > *:nth-child(50) {
+  opacity: 1;
+  z-index: 51;
 }
