@@ -5,10 +5,9 @@ import Image from 'next/image';
 
 export default function Cards({ params }) {
   const [tracks, setTracks] = useState([]);
-  // const [currentIndex, setCurrentIndex] = useState(tracks.length - 1);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [lastDirection, setLastDirection] = useState();
-  // used for outOfFrame closure
+
   const currentIndexRef = useRef(currentIndex);
 
   useEffect(() => {
@@ -29,16 +28,13 @@ export default function Cards({ params }) {
     currentIndexRef.current = val;
   };
 
-  // const canGoBack = currentIndex < tracks.length - 1;
   const canGoBack = currentIndex > 0;
 
-  // const canSwipe = currentIndex >= 0;
   const canSwipe = currentIndex < tracks.length;
 
   // set last direction and decrease current index
   const swiped = (direction, nameToDelete, index) => {
     setLastDirection(direction);
-    // updateCurrentIndex(index - 1);
     updateCurrentIndex(index + 1);
   };
 
@@ -55,14 +51,13 @@ export default function Cards({ params }) {
     document.querySelectorAll('audio').forEach((elem) => elem.pause());
     if (canSwipe && currentIndex < tracks.length) {
       await childRefs[currentIndex].current.swipe(dir); // Swipe the card!
-      // audio.pause();
     }
   };
 
-  // increase current index and show card
+  // decrease current index and show card
   const goBack = async () => {
+    document.querySelectorAll('audio').forEach((elem) => elem.pause());
     if (!canGoBack) return;
-    // const newIndex = currentIndex + 1;
     const newIndex = currentIndex - 1;
     updateCurrentIndex(newIndex);
     await childRefs[newIndex].current.restoreCard();
@@ -88,9 +83,8 @@ export default function Cards({ params }) {
   const cards = tracks.map((rec, index) => {
     return (
       <TinderCard
-        // id={rec.id}
         ref={childRefs[index]}
-        className="card w-96 h-96 bg-base-100 shadow-md border-2 border-primary border-solid"
+        className="card w-80 h-80 bg-base-300 rounded-xl border-2 border-primary border-solid"
         key={rec.id}
         onSwipe={(dir) => swiped(dir, rec.name, index)}
         onCardLeftScreen={() => outOfFrame(rec.name, index)}
@@ -100,12 +94,11 @@ export default function Cards({ params }) {
             src={rec.album.images[0].url || spotifyImage}
             width={200}
             height={200}
-            // fill="true"
             alt="album art"
-            className="w-auto h-full rounded-md pointer-events-none border-2 border-neutral border-solid"
+            className="w-auto h-full overflow-visible rounded-md pointer-events-none border-2 border-neutral border-solid"
           ></Image>
         </figure>
-        <div className="card-body p-0 flex justify-center items-center text-center">
+        <div className="card-body p-0 bg-base-300 rounded-lg flex justify-around items-center text-center">
           <h2 className="card-title">{rec.name}</h2>
           <h3 className="card-subtitle">{rec.artists[0].name}</h3>
           <div className="w-full flex justify-center items-center">
@@ -144,17 +137,27 @@ export default function Cards({ params }) {
   return (
     <div>
       <div className="stack w-full h-full">{cards}</div>
-      <div className="flex justify-around">
-        <button className="btn btn-primary" onClick={() => swipe('left')}>
-          Swipe left!
-        </button>
-        <button className="btn btn-primary" onClick={() => goBack()}>
-          Undo swipe!
-        </button>
-        <button className="btn btn-primary" onClick={() => swipe('right')}>
-          Swipe right!
-        </button>
-      </div>
+      {tracks.length ? (
+        <div className="flex justify-around">
+          <button
+            className="btn btn-primary mr-4"
+            onClick={() => swipe('left')}
+          >
+            Swipe left!
+          </button>
+          <button className="btn btn-primary" onClick={() => goBack()}>
+            Undo swipe!
+          </button>
+          <button
+            className="btn btn-primary ml-4"
+            onClick={() => swipe('right')}
+          >
+            Swipe right!
+          </button>
+        </div>
+      ) : (
+        <div>Select a genre to get recs!</div>
+      )}
     </div>
   );
 }

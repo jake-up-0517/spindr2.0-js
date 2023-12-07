@@ -1,6 +1,6 @@
 export default function Navbar() {
   return (
-    <div className="navbar bg-base-100 border-solid border-2 border-accent">
+    <div className="navbar bg-base-100">
       <div className="navbar-start">
         <div className="dropdown">
           <label tabIndex={0} className="btn btn-ghost md:hidden">
@@ -36,15 +36,17 @@ export default function Navbar() {
       <div className="navbar-center hidden md:flex">
         <ul className="menu menu-horizontal px-1">
           <li>
-            <a>Home</a>
+            <a href="/home">Home</a>
           </li>
           <li>
-            <a>Playlists</a>
+            <a href="/playlists">Playlists</a>
           </li>
         </ul>
       </div>
       <div className="navbar-end">
-        <a className="btn">Sign Out</a>
+        <a className="btn" href="/api/auth/signout">
+          Sign Out
+        </a>
       </div>
     </div>
   );

@@ -36,12 +36,11 @@ export default function HomePage() {
 
   useEffect(() => {
     getUser();
-    // setRecs(recs);
   }, []);
 
   return (
-    <div className="w-screen h-screen flex justify-center items-center">
-      <div className="w-1/4 h-full pt-8 flex justify-center items-center">
+    <div className="w-full h-full flex justify-center items-center">
+      <div className="w-1/4 h-full mb-8 flex justify-center items-center">
         <GenresSidebar
           params={{
             handleCheck,
@@ -49,10 +48,10 @@ export default function HomePage() {
           }}
         />
       </div>
-      <div className="w-1/2 h-full flex flex-col m-0 pt-8 justify-start items-center">
+      <div className="w-1/2 h-full flex flex-col mb-8 pt-8 justify-start items-center">
         <Cards params={{ tracks, seeds }} />
       </div>
-      <div className="w-1/4 h-full pt-8 flex justify-center items-center">
+      <div className="w-1/4 h-full mb-8 flex justify-center items-center">
         <PlaylistSidebar />
       </div>
     </div>
