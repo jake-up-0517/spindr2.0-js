@@ -127,6 +127,23 @@ export const genres = [
   'world-music',
 ];
 
+export const playlists = {
+  'playlist 1': ['song 1', 'song 2', 'song 3', 'song 4'],
+  'playlist 2': ['song 4', 'song 5', 'song 6', 'song 7'],
+  'playlist 3': [
+    'song 7',
+    'song 8',
+    'song 9',
+    'song 10',
+    'song 11',
+    'song 12',
+    'song 13',
+    'song 14',
+    'song 15',
+    'song 16',
+  ],
+};
+
 export const tracks = [
   {
     album: {

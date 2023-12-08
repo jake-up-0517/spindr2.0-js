@@ -4,7 +4,9 @@ import authOptions from '../auth/[...nextauth]/authOptions';
 
 export const POST = async (req) => {
   const session = await getServerSession(authOptions);
+  // console.log('req', req.text());
   const seed = await req.text();
+  console.log('seed', seed);
   const url = `https://api.spotify.com/v1/recommendations?limit=50&seed_genres=${seed}`;
   const recs = await fetch(url, {
     headers: {

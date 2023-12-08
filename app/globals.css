@@ -259,3 +259,7 @@
   opacity: 1;
   z-index: 51;
 }
+
+.divider {
+  margin: 0;
+}

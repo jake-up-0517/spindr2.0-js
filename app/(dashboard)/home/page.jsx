@@ -1,22 +1,61 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { getUserInfo, getRecommendations } from '@/utils/api';
+import {
+  getUserInfo,
+  getRecommendations,
+  getPlaylists,
+  updatePlaylist,
+} from '@/utils/api';
 import { genres } from '@/utils/data';
 import Cards from '@/components/Cards';
 import GenresSidebar from '@/components/GenresSidebar';
 import PlaylistSidebar from '@/components/PlaylistSidebar';
 
 export default function HomePage() {
-  const [user, setUser] = useState();
-  const [tracks, setTracks] = useState([]);
-  const [seeds, setSeeds] = useState([]);
+  const [user, setUser] = useState(); // user info
+  const [tracks, setTracks] = useState([]); //recommended tracks
+  const [seeds, setSeeds] = useState([]); // selected genres
+  const [playlists, setPlaylists] = useState([]); // user playlists from db
+  const [currentPlaylist, setCurrentPlaylist] = useState(); // current selected playlist
+  const [currentPlaylistTracks, setCurrentPlaylistTracks] = useState([]); // current saved tracks from db
+  const [currentTracks, setCurrentTracks] = useState([]); // current unsaved tracks
 
   const getUser = async () => {
     const response = await getUserInfo();
     const data = await JSON.parse(response);
     setUser(data);
-    console.log('user data', data);
+  };
+
+  const getUserPlaylists = async () => {
+    const response = await getPlaylists();
+    const data = await JSON.parse(response);
+    setPlaylists(data);
+  };
+
+  const updateCurrentPlaylist = async () => {
+    const response = await updatePlaylist(currentTracks, currentPlaylist);
+    const data = await JSON.parse(response);
+    console.log(data);
+    updateCurrentPlaylistTracks(currentPlaylist);
+  };
+
+  const updateCurrentPlaylistTracks = (name) => {
+    console.log('updating current playlist tracks');
+    console.log(name);
+    playlists.every((playlist) => {
+      if (playlist.name === name) {
+        console.log('found');
+        const tracks = [];
+        playlist.songs.map((track) => {
+          tracks.push(track.name);
+        });
+        setCurrentPlaylistTracks(tracks);
+        return false;
+      } else {
+        return true;
+      }
+    });
   };
 
   const handleCheck = (index) => {
@@ -36,11 +75,17 @@ export default function HomePage() {
 
   useEffect(() => {
     getUser();
+    getUserPlaylists();
   }, []);
+
+  useEffect(() => {
+    console.log('currentTracks', currentTracks);
+    console.log('currentPlaylistTracks', currentPlaylistTracks);
+  }, [currentPlaylist, currentTracks, currentPlaylistTracks]);
 
   return (
     <div className="w-full h-full flex justify-center items-center">
-      <div className="w-1/4 h-full mb-8 flex justify-center items-center">
+      <div className="w-1/5 h-full mb-8 ml-1 flex justify-center items-center">
         <GenresSidebar
           params={{
             handleCheck,
@@ -48,11 +93,28 @@ export default function HomePage() {
           }}
         />
       </div>
-      <div className="w-1/2 h-full flex flex-col mb-8 pt-8 justify-start items-center">
-        <Cards params={{ tracks, seeds }} />
+      <div className="w-3/5 h-full flex flex-col justify-between items-center">
+        <Cards
+          params={{
+            tracks,
+            seeds,
+            currentTracks,
+            setCurrentTracks,
+          }}
+        />
       </div>
-      <div className="w-1/4 h-full mb-8 flex justify-center items-center">
-        <PlaylistSidebar />
+      <div className="w-1/5 h-full mr-1 flex justify-center items-center">
+        <PlaylistSidebar
+          params={{
+            playlists,
+            currentTracks,
+            currentPlaylist,
+            currentPlaylistTracks,
+            setCurrentPlaylist,
+            updateCurrentPlaylistTracks,
+            updateCurrentPlaylist,
+          }}
+        />
       </div>
     </div>
   );
