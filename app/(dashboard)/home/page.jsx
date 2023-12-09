@@ -21,6 +21,23 @@ export default function HomePage() {
   const [currentPlaylistTracks, setCurrentPlaylistTracks] = useState([]); // current saved tracks from db
   const [currentTracks, setCurrentTracks] = useState([]); // current unsaved tracks
 
+  useEffect(() => {
+    getUser();
+    getUserPlaylists();
+  }, []);
+
+  useEffect(() => {
+    console.log('currentTracks', currentTracks);
+    console.log('currentPlaylistTracks', currentPlaylistTracks);
+    // updateCurrentPlaylist();
+  }, [currentPlaylist, currentTracks, currentPlaylistTracks]);
+
+  // useEffect(() => {
+  //   updateCurrentPlaylist();
+  //   console.log('currentPlaylist in UE', currentPlaylist);
+  //   updateCurrentPlaylistTracks(currentPlaylist);
+  // }, [currentPlaylist]);
+
   const getUser = async () => {
     const response = await getUserInfo();
     const data = await JSON.parse(response);
@@ -30,22 +47,26 @@ export default function HomePage() {
   const getUserPlaylists = async () => {
     const response = await getPlaylists();
     const data = await JSON.parse(response);
+    console.log('gup pl', data);
     setPlaylists(data);
   };
 
   const updateCurrentPlaylist = async () => {
+    console.log('update current playlist');
     const response = await updatePlaylist(currentTracks, currentPlaylist);
     const data = await JSON.parse(response);
     console.log(data);
     updateCurrentPlaylistTracks(currentPlaylist);
   };
 
-  const updateCurrentPlaylistTracks = (name) => {
+  const updateCurrentPlaylistTracks = async (name) => {
     console.log('updating current playlist tracks');
-    console.log(name);
+    await getUserPlaylists();
+    console.log('playlists', playlists);
+    // setCurrentTracks([]);
     playlists.every((playlist) => {
       if (playlist.name === name) {
-        console.log('found');
+        // console.log('found');
         const tracks = [];
         playlist.songs.map((track) => {
           tracks.push(track.name);
@@ -72,16 +93,6 @@ export default function HomePage() {
     const data = await JSON.parse(response);
     setTracks(data.tracks);
   };
-
-  useEffect(() => {
-    getUser();
-    getUserPlaylists();
-  }, []);
-
-  useEffect(() => {
-    console.log('currentTracks', currentTracks);
-    console.log('currentPlaylistTracks', currentPlaylistTracks);
-  }, [currentPlaylist, currentTracks, currentPlaylistTracks]);
 
   return (
     <div className="w-full h-full flex justify-center items-center">
@@ -110,6 +121,7 @@ export default function HomePage() {
             currentTracks,
             currentPlaylist,
             currentPlaylistTracks,
+            setCurrentTracks,
             setCurrentPlaylist,
             updateCurrentPlaylistTracks,
             updateCurrentPlaylist,
