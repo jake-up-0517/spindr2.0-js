@@ -5,10 +5,10 @@ import { useState, useEffect } from 'react';
 export default function PlaylistSidebar({ params }) {
   const [count, setCount] = useState({});
 
-  useEffect(() => {
-    console.log('playlist sidebar');
-    console.log(params.currentPlaylistTracks);
-  }, [params.currentPlaylistTracks]);
+  // useEffect(() => {
+  // console.log('playlist sidebar');
+  // console.log(params.currentPlaylistTracks);
+  // }, [params.currentPlaylistTracks]);
 
   const selects = params.playlists.map((playlist) => {
     return (
@@ -24,30 +24,8 @@ export default function PlaylistSidebar({ params }) {
     params.updateCurrentPlaylistTracks(
       document.getElementById('pl-select').value
     );
+    params.setCurrentTracks([]);
   };
-
-  // const poll = () => {
-  //   console.log('polling');
-  //   console.log(params.playlists);
-  //   console.log(params.currentPlaylist);
-  //   if (!params.currentPlaylist) return;
-  //   else {
-  //     params.playlists.every((playlist) => {
-  //       if (playlist.name === params.currentPlaylist) {
-  //         const tracks = [...params.currentTracks];
-  //         playlist.songs.map((track) => {
-  //           console.log(track.name);
-  //           console.log(tracks);
-  //           tracks.push(track.name);
-  //         });
-  //         setCurrentTracks(tracks);
-  //         return false;
-  //       } else {
-  //         return true;
-  //       }
-  //     });
-  //   }
-  // };
 
   return (
     <div className="w-full h-full flex flex-col justify-around items-center">

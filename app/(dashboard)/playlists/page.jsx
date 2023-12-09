@@ -4,6 +4,12 @@ import { useState, useEffect } from 'react';
 import { getPlaylists, createPlaylist } from '@/utils/api';
 import PlaylistCard from '@/components/PlaylistCard';
 
+//TODO: Add a button to create a new playlist
+//TODO: Add a button to delete a playlist
+//TODO: Add a button to edit a playlist
+//TODO: Push pl to Spotify
+//TODO: Styling
+
 export default function PlaylistsPage() {
   const [playlists, setPlaylists] = useState([]);
 
